@@ -1,16 +1,15 @@
-package nsu.leorita.exchanges.ui.currenciesList
+package nsu.leorita.exchanges.ui.list
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import nsu.leorita.exchanges.data.room.entities.CurrencyDbEntity
 import nsu.leorita.exchanges.domain.model.Currency
-import nsu.leorita.exchanges.domain.room.AppDatabase
+import nsu.leorita.exchanges.data.room.AppDatabase
 import nsu.leorita.exchanges.domain.services.RangesService
 
 class CurrenciesListViewModel(
@@ -35,7 +34,7 @@ class CurrenciesListViewModel(
 
     fun loadCurrenciesFromWeb() {
          rangesService.getRanges()
-            .map { it.ranges.values }
+            .map { it.ranges }
             .map { currencies ->
                 currencies.map {
                     CurrencyDbEntity(

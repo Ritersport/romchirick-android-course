@@ -1,9 +1,8 @@
-package nsu.leorita.exchanges.ui.currencyConverter
+package nsu.leorita.exchanges.ui.converter
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import nsu.leorita.exchanges.domain.model.Currency
 
 class CurrencyConverterViewModel : ViewModel() {
 

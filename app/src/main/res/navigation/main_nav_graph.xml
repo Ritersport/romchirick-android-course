@@ -2,11 +2,10 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/currenciesListFragment"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:startDestination="@id/currenciesListFragment">
     <fragment
         android:id="@+id/currenciesListFragment"
-        android:name="nsu.leorita.exchanges.ui.currenciesList.CurrenciesListFragment"
+        android:name="nsu.leorita.exchanges.ui.list.CurrenciesListFragment"
         android:label="CurrenciesListFragment" >
         <action
             android:id="@+id/action_currenciesListFragment_to_currencyConverterFragment"
@@ -14,6 +13,6 @@
     </fragment>
     <fragment
         android:id="@+id/currencyConverterFragment"
-        android:name="nsu.leorita.exchanges.ui.currencyConverter.CurrencyConverterFragment"
+        android:name="nsu.leorita.exchanges.ui.converter.CurrencyConverterFragment"
         android:label="CurrencyConverterFragment" />
 </navigation>

@@ -1,4 +1,4 @@
-package nsu.leorita.exchanges.ui.currenciesList
+package nsu.leorita.exchanges.ui.list
 
 import android.os.Bundle
 import android.view.LayoutInflater

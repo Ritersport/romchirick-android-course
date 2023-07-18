@@ -6,8 +6,7 @@ import nsu.leorita.exchanges.domain.model.RangesInfo
 
 object RangesMapper {
     fun toDomen(message: ExchangeMessage) : RangesInfo {
-        val ranges = HashMap<String, Currency>()
-        message.valuteSet.forEach { (s, valute) ->  ranges.put(s, Currency(valute.code, valute.name, valute.nominal, valute.value, valute.previousValue))}
+        val ranges = message.valuteSet.toList().map { Currency(it.second.code, it.second.name, it.second.nominal, it.second.value, it.second.previousValue) }
         return RangesInfo(message.date, ranges)
     }
 }

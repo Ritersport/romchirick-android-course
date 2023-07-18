@@ -4,10 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import nsu.leorita.exchanges.App
-import nsu.leorita.exchanges.domain.room.AppDatabase
-import nsu.leorita.exchanges.domain.services.RangesService
-import nsu.leorita.exchanges.ui.currenciesList.CurrenciesListViewModel
-import nsu.leorita.exchanges.ui.currencyConverter.CurrencyConverterViewModel
+import nsu.leorita.exchanges.ui.list.CurrenciesListViewModel
+import nsu.leorita.exchanges.ui.converter.CurrencyConverterViewModel
 import java.lang.IllegalStateException
 
 class ViewModelFactory (

@@ -1,4 +1,4 @@
-package nsu.leorita.exchanges.ui.currencyConverter
+package nsu.leorita.exchanges.ui.converter
 
 import android.os.Bundle
 import android.view.LayoutInflater
