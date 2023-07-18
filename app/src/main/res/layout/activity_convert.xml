@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.ConvertActivity">
+
+
+    <TextView
+        android:id="@+id/sumTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:text="@string/sum_text_view" />
+
+    <EditText
+        android:id="@+id/valueEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:inputType="numberDecimal"
+        android:labelFor="@id/sumTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sumTextView"
+        android:autofillHints="1000" />
+
+    <TextView
+        android:id="@+id/currencyTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/currency_text_view"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/valueEditText"
+        android:padding="12dp"
+        android:textSize="20sp"
+        android:background="@android:drawable/editbox_background"/>
+
+    <Button
+        android:id="@+id/convertButton"
+        android:text="@string/convert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        app:layout_constraintTop_toBottomOf="@id/currencyTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        android:id="@+id/convertedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/convertButton"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="40sp"
+        tools:text="140"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
