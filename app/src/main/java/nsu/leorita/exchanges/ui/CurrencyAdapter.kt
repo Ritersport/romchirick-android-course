@@ -1,8 +1,7 @@
-package nsu.leorita.exchanges.adapters
+package nsu.leorita.exchanges.ui
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import nsu.leorita.exchanges.databinding.ItemCurrencyBinding
@@ -23,7 +22,7 @@ class CurrencyAdapter(private val onClick: (Currency) -> Unit) : RecyclerView.Ad
         fun bind(currency: Currency, onClick: (Currency) -> Unit) {
             binding.nameTextView.text = currency.name
             binding.symbolTextView.text = currency.code
-            binding.nominalTextView.text = currency.getRange().toString()
+            binding.nominalTextView.text = "%.3f".format(currency.getRange())
             binding.root.setOnClickListener {
                 onClick(currency)
             }

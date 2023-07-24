@@ -10,7 +10,6 @@ import androidx.room.Room
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import nsu.leorita.exchanges.adapters.CurrencyAdapter
 import nsu.leorita.exchanges.data.room.entities.CurrencyDbEntity
 import nsu.leorita.exchanges.data.services.RangeServiceImpl
 import nsu.leorita.exchanges.databinding.ActivityMainBinding
