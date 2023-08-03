@@ -24,7 +24,7 @@ class ConvertActivity: AppCompatActivity(   ) {
     }
 
     private fun onConvertButtonClick() {
-        binding.currencyName.text = ""
+        binding.currency.setText("")
         if (binding.rubles.text == null) {
             binding.rubles.setText("")
         }

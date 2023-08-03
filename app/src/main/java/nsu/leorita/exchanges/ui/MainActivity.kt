@@ -70,7 +70,8 @@ class MainActivity : AppCompatActivity() {
                         it.code,
                         it.name,
                         it.denomination,
-                        it.value
+                        it.value,
+                        it.previousValue
                     )
                 }
             }
@@ -97,7 +98,7 @@ class MainActivity : AppCompatActivity() {
             ?.subscribe({t ->
                 currencyEntities.addAll(t)
                 currencyEntities.forEach {
-                    currencies.add(Currency(it.code, it.name, it.denomination, it.value))
+                    currencies.add(Currency(it.code, it.name, it.denomination, it.value, it.previousValue))
                     adapter.data = currencies
                 }
             },
