@@ -8,7 +8,7 @@ import nsu.leorita.exchanges.databinding.ItemCurrencyBinding
 import nsu.leorita.exchanges.domain.model.Currency
 
 class CurrencyAdapter(private val onClick: (Currency) -> Unit) : RecyclerView.Adapter<CurrencyAdapter.CurrencyViewHolder>() {
-    var data: ArrayList<Currency> = ArrayList()
+    var data: List<Currency> = ArrayList()
         @SuppressLint("NotifyDataSetChanged")
         set(newValue) {
             field = newValue
