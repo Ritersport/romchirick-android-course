@@ -6,10 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import nsu.leorita.exchanges.data.room.entities.CurrencyDbEntity
-import nsu.leorita.exchanges.data.services.RangeServiceImpl
 import nsu.leorita.exchanges.domain.model.Currency
 import nsu.leorita.exchanges.domain.room.AppDatabase
 import nsu.leorita.exchanges.domain.services.RangesService
@@ -26,7 +24,7 @@ class CurrenciesListViewModel(
 
     init {
         loadCurrenciesFromDb()
-        if (_currencies.value?.isEmpty() == true) {
+        if (_currencies.value?.isEmpty() == true || _currencies.value == null) {
             loadCurrenciesFromWeb()
         }
     }
@@ -51,7 +49,9 @@ class CurrenciesListViewModel(
                     )
                 }
             }
-            .flatMapCompletable { dbEntities -> db.getCurrenciesDao().insertAll(dbEntities) }
+            .flatMapCompletable {
+                    dbEntities -> db.getCurrenciesDao().insertAll(dbEntities)
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -69,7 +69,6 @@ class CurrenciesListViewModel(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({ it ->
-                db.getCurrenciesDao().insertAll(it)
                 _currencies.value = it.map { Currency(it.code, it.name, it.denomination, it.value, it.previousValue) }
             },
         {

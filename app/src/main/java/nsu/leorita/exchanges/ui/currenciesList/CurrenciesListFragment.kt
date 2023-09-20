@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import nsu.leorita.exchanges.R
 import nsu.leorita.exchanges.databinding.FragmentCurrenciesListBinding
 import nsu.leorita.exchanges.domain.model.Currency
 import nsu.leorita.exchanges.ui.ConvertActivity
@@ -47,6 +49,7 @@ class CurrenciesListFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = layoutManager
         binding.swiperefresh.setOnRefreshListener {
+
             viewModel.loadCurrenciesFromWeb()
             binding.swiperefresh.isRefreshing = false
         }
@@ -56,7 +59,7 @@ class CurrenciesListFragment : Fragment() {
         val recycleItemIntent = Intent(requireContext(), ConvertActivity::class.java)
         recycleItemIntent.putExtra("currencyName", data.name)
         recycleItemIntent.putExtra("currencyValue", data.getRange())
-        startActivity(recycleItemIntent)
+        findNavController().navigate(R.id.action_currenciesListFragment_to_currencyConverterFragment)
     }
 
 }
