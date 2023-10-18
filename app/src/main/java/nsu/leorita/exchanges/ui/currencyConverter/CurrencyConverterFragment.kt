@@ -25,4 +25,27 @@ class CurrencyConverterFragment : Fragment() {
         _binding = FragmentCurrencyConverterBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.mulResult.observe(viewLifecycleOwner) {
+            binding.currency.setText(it.toString())
+        }
+
+        binding.currencyName.text = arguments?.getString("currencyName")
+        binding.convertButton.setOnClickListener {
+            val amount = binding.rubles.text.toString().toFloat()
+            val range = arguments?.getFloat("currencyRange")
+            viewModel.convert(amount, range)
+        }
+
+        binding.clearButton.setOnClickListener {
+            with(binding) {
+                currency.setText("")
+                rubles.setText("")
+            }
+
+        }
+    }
 }

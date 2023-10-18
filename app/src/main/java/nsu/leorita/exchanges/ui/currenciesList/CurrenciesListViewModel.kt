@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -24,9 +25,6 @@ class CurrenciesListViewModel(
 
     init {
         loadCurrenciesFromDb()
-        if (_currencies.value?.isEmpty() == true || _currencies.value == null) {
-            loadCurrenciesFromWeb()
-        }
     }
 
     override fun onCleared() {
@@ -53,10 +51,9 @@ class CurrenciesListViewModel(
                     dbEntities -> db.getCurrenciesDao().insertAll(dbEntities)
             }
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-
+                    loadCurrenciesFromDb()
                 },
                 { error ->
                     Log.e("ranges", error.message + ": web service error")
@@ -64,7 +61,7 @@ class CurrenciesListViewModel(
             ).also { subscriptions.add(it) }
     }
 
-    fun loadCurrenciesFromDb() {
+    private fun loadCurrenciesFromDb() {
         db.getCurrenciesDao().getAll()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
