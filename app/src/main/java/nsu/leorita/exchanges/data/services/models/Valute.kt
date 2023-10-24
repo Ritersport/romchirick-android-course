@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Valute(
     @SerializedName("CharCode")
-    var code: String? = null,
+    var code: String,
 
     @SerializedName("Nominal")
     var nominal: Int,
@@ -14,4 +14,7 @@ data class Valute(
 
     @SerializedName("Value")
     var value: Float,
+
+    @SerializedName("Previous")
+    var previousValue: Float,
 )
