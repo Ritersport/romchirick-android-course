@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Exchanges</string>
-    <string name="convert">Convert</string>
-    <string name="sum_text_view">Введите сумму в рублях:</string>
-    <string name="currency_text_view">Выберите валюту:</string>
-    <string name="select_currency">Select currency</string>
-    <string name="search">Search...</string>
-</resources>
