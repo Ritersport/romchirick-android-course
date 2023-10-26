@@ -1,5 +1,6 @@
 package nsu.leorita.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -9,10 +10,14 @@ class ActivityC : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_c)
-        val button = findViewById<AppCompatButton>(R.id.button)
-        val intent = Intent(this, MainActivity::class.java)
-        button.setOnClickListener {
-            startActivity(intent)
+        findViewById<AppCompatButton>(R.id.button).setOnClickListener {
+            startActivity(intent(this))
+        }
+    }
+
+    companion object {
+        fun intent(context: Context): Intent {
+            return Intent(context, MainActivity::class.java)
         }
     }
 }
