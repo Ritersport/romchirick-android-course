@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+import androidx.fragment.app.commit
+
+const val tag = "tag"
 
 class FragmentA : Fragment() {
 
@@ -20,16 +23,16 @@ class FragmentA : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.supportFragmentManager?.popBackStack("tag", POP_BACK_STACK_INCLUSIVE)
+
         view.findViewById<AppCompatButton>(R.id.button).setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.setCustomAnimations(
+            parentFragmentManager.commit {
+                setCustomAnimations(
                     R.anim.slide_in,
                     R.anim.fade_out,
                 )
-                ?.replace(R.id.fragmentContainer, FragmentB())
-                ?.addToBackStack("tag")
-                ?.commit()
+                replace(R.id.fragmentContainer, FragmentB())
+                addToBackStack(tag)
+            }
         }
     }
 }

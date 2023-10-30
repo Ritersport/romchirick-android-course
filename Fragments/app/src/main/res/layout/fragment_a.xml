@@ -5,11 +5,10 @@
     android:layout_height="match_parent">
 
     <TextView
+        style="@style/DefaultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="A"
-        android:textColor="#7A48"
-        android:textSize="550sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

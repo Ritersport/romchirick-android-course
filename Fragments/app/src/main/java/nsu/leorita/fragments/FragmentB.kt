@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 
 class FragmentB : Fragment() {
     override fun onCreateView(
@@ -19,14 +20,14 @@ class FragmentB : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<AppCompatButton>(R.id.button).setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.setCustomAnimations(
+            parentFragmentManager.commit {
+                setCustomAnimations(
                     R.anim.slide_in,
                     R.anim.fade_out,
                 )
-                ?.replace(R.id.fragmentContainer, FragmentC())
-                ?.addToBackStack("tag")
-                ?.commit()
+                replace(R.id.fragmentContainer, FragmentC())
+                addToBackStack(tag)
+            }
         }
     }
 }
