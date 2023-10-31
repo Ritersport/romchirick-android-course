@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 
 class FragmentB : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,9 +26,14 @@ class FragmentB : Fragment() {
                     R.anim.slide_in,
                     R.anim.fade_out,
                 )
-                replace(R.id.fragmentContainer, FragmentC())
-                addToBackStack(tag)
+                replace(R.id.fragmentContainer, FragmentC.getInstance())
+                addToBackStack(FRAGMENT_BACK_STACK_TAG)
             }
         }
+    }
+
+    companion object {
+        fun getInstance(): Fragment = FragmentB()
+
     }
 }

@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import androidx.fragment.app.commit
 
-const val tag = "tag"
+const val FRAGMENT_BACK_STACK_TAG = "tag"
 
 class FragmentA : Fragment() {
 
@@ -30,9 +29,14 @@ class FragmentA : Fragment() {
                     R.anim.slide_in,
                     R.anim.fade_out,
                 )
-                replace(R.id.fragmentContainer, FragmentB())
-                addToBackStack(tag)
+                replace(R.id.fragmentContainer, FragmentB.getInstance())
+                addToBackStack(FRAGMENT_BACK_STACK_TAG)
             }
         }
+    }
+
+    companion object {
+        fun getInstance(): Fragment = FragmentA()
+
     }
 }

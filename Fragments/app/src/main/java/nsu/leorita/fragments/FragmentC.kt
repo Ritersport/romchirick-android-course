@@ -20,7 +20,11 @@ class FragmentC : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<AppCompatButton>(R.id.button).setOnClickListener {
-            parentFragmentManager.popBackStack(tag, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            parentFragmentManager.popBackStack(FRAGMENT_BACK_STACK_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
+    }
+
+    companion object {
+        fun getInstance(): Fragment = FragmentC()
     }
 }
