@@ -1,24 +1,35 @@
 package nsu.leorita.recycler.ui.view_models
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
+import nsu.leorita.recycler.domain.AdService
 import nsu.leorita.recycler.domain.SongService
+import nsu.leorita.recycler.ui.recycler_stuff.delegates.AdDelegate
 import nsu.leorita.recycler.ui.recycler_stuff.delegates.Delegate
 import nsu.leorita.recycler.ui.recycler_stuff.delegates.SongDelegate
+import nsu.leorita.recycler.ui.recycler_stuff.items.AdItem
 import nsu.leorita.recycler.ui.recycler_stuff.items.ListItem
 import nsu.leorita.recycler.ui.recycler_stuff.items.SongItem
 
-class ListViewModel(private val songService: SongService) : ViewModel() {
-    fun getDelegates(context: Context): List<Delegate> =
+class ListViewModel(
+    private val songService: SongService,
+    private val adService: AdService,
+    ) : ViewModel() {
+
+    private val songsPackSize = 15
+    fun getDelegates(): List<Delegate> =
         listOf(
-            SongDelegate(context),
+            SongDelegate(),
+            AdDelegate(),
         )
 
     fun getItems(): List<ListItem> {
-        val songs: List<SongItem> = songService.getSongs().map {
+        val songs: List<ListItem> = songService.getSongs(songsPackSize).map {
             SongItem(it.name, it.singer)
         }
-        return songs
+        val ads = adService.getAds().map {
+            AdItem(it.category, it.header, it.description)
+        }
+        return songs + ads
     }
 
 }

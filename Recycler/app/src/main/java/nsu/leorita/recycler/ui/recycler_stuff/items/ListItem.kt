@@ -1,5 +1,3 @@
 package nsu.leorita.recycler.ui.recycler_stuff.items
 
-sealed interface ListItem {
-
-}
+sealed interface ListItem

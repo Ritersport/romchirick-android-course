@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import nsu.leorita.recycler.data.SongServiceRiRo
+import nsu.leorita.recycler.data.AdServiceRandom
+import nsu.leorita.recycler.data.SongServiceRandom
 import nsu.leorita.recycler.databinding.FragmentListBinding
 import nsu.leorita.recycler.ui.recycler_stuff.RecyclerAdapter
 import nsu.leorita.recycler.ui.factory
@@ -20,7 +21,9 @@ class ListFragment : Fragment() {
     private val binding: FragmentListBinding
         get() = requireNotNull(_binding)
 
-    private val viewModel: ListViewModel by viewModels { factory(SongServiceRiRo())  }
+    private val viewModel: ListViewModel by viewModels {
+        factory(SongServiceRandom(), AdServiceRandom())
+    }
 
     private val itemMargin = 16
     override fun onCreateView(
@@ -35,7 +38,7 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recycler.layoutManager = LinearLayoutManager(context)
-        binding.recycler.adapter = RecyclerAdapter(viewModel.getDelegates(requireContext()), viewModel.getItems())
+        binding.recycler.adapter = RecyclerAdapter(viewModel.getDelegates(), viewModel.getItems())
         binding.recycler.addItemDecoration(MarginItemDecoration(itemMargin))
     }
 
