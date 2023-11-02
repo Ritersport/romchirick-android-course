@@ -8,7 +8,7 @@ import nsu.leorita.recycler.ui.recycler_stuff.view_holders.SongViewHolder
 import nsu.leorita.recycler.ui.recycler_stuff.items.ListItem
 import nsu.leorita.recycler.ui.recycler_stuff.items.SongItem
 
-class SongDelegate() : Delegate {
+class SongDelegate : Delegate {
     override fun forItem(item: ListItem): Boolean = item is SongItem
 
     override fun getViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {

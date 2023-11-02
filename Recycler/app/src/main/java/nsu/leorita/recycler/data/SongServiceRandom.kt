@@ -1,13 +1,14 @@
 package nsu.leorita.recycler.data
 
+import io.reactivex.Single
 import nsu.leorita.recycler.domain.Song
 import nsu.leorita.recycler.domain.SongService
 
 class SongServiceRandom : SongService {
-    override fun getSongs(count: Int): List<Song> {
+    override fun getSongs(count: Int): Single<List<Song>> {
         val singers = listOf(
-            "rita",
-            "roma",
+            "Rita",
+            "Roma",
             "Komsomolsk",
             "SBPCH",
             "Mitski",
@@ -22,9 +23,9 @@ class SongServiceRandom : SongService {
             "MrrrMeow",
         )
         val items = mutableListOf<Song>()
-        for (i: Int in 0..count) {
+        for (i: Int in 0..<count) {
             items.add(i, Song(songs.random(), singers.random()))
         }
-        return items
+        return Single.just(items)
     }
 }

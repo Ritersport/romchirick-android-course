@@ -1,5 +1,7 @@
 package nsu.leorita.recycler.domain
 
+import io.reactivex.Single
+
 interface AdService {
-    fun getAds(): List<Ad>
+    fun getAd(): Single<List<Ad>>
 }
