@@ -13,11 +13,11 @@ class RecyclerAdapter(
 
     var items: List<ListItem> = mutableListOf()
         set(value) {
-            val callback = CommonCallbackImpl(oldItems = field,
+            val callback = CommonCallbackImpl(
+                oldItems = field,
                 newItems = value,
-                getChangePayloadImpl = { _, _ -> Any() })
+            )
             field = value
-            notifyDataSetChanged()
             val diffResult = DiffUtil.calculateDiff(callback)
             diffResult.dispatchUpdatesTo(this)
         }
@@ -33,7 +33,6 @@ class RecyclerAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         delegates[getItemViewType(position)].bindViewHolder(holder, items[position])
     }
-
 
 
 }

@@ -17,6 +17,8 @@ class MarginItemDecoration(private val spaceSize: Int) : RecyclerView.ItemDecora
                 top = spaceSize.dp
             }
             bottom = spaceSize.dp
+            left = spaceSize.dp
+            right = spaceSize.dp
         }
     }
 }

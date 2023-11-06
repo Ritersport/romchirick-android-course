@@ -6,16 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import nsu.leorita.recycler.data.AdServiceRandom
 import nsu.leorita.recycler.data.SongServiceRandom
 import nsu.leorita.recycler.databinding.FragmentListBinding
 import nsu.leorita.recycler.ui.recycler_stuff.RecyclerAdapter
 import nsu.leorita.recycler.ui.factory
 import nsu.leorita.recycler.ui.recycler_stuff.MarginItemDecoration
-import nsu.leorita.recycler.ui.recycler_stuff.items.AdItem
+import nsu.leorita.recycler.ui.recycler_stuff.delegates.AdDelegate
+import nsu.leorita.recycler.ui.recycler_stuff.delegates.SongDelegate
 import nsu.leorita.recycler.ui.view_models.ListViewModel
+
+private const val ITEM_MARGIN = 16
 
 class ListFragment : Fragment() {
 
@@ -27,7 +28,17 @@ class ListFragment : Fragment() {
         factory(SongServiceRandom(), AdServiceRandom())
     }
 
-    private val itemMargin = 16
+    private val delegates by lazy {
+        listOf(
+            SongDelegate(),
+            AdDelegate(),
+        )
+    }
+
+    private val _adapter by lazy {
+        RecyclerAdapter(delegates)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,16 +50,22 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.recycler.layoutManager = LinearLayoutManager(context)
-        val adapter = RecyclerAdapter(viewModel.getDelegates())
-        binding.recycler.adapter = adapter
-        binding.recycler.addItemDecoration(MarginItemDecoration(itemMargin))
-        viewModel.items.observe(viewLifecycleOwner, Observer {
-            adapter.items = it
-        })
+        initAdapter()
+        initObservers()
     }
 
+    private fun initAdapter() {
+        with(binding.recycler) {
+            adapter = _adapter
+            addItemDecoration(MarginItemDecoration(ITEM_MARGIN))
+        }
+    }
 
+    private fun initObservers() {
+        viewModel.items.observe(viewLifecycleOwner) {
+            _adapter.items = it
+        }
+    }
 
     companion object {
         fun getInstance(): Fragment = ListFragment()
