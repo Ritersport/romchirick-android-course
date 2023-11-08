@@ -8,10 +8,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import nsu.titov.myconverter.R
 import nsu.titov.myconverter.databinding.FragmentConverterBinding
 import nsu.titov.myconverter.presentation.ConverterViewModel
 
+@AndroidEntryPoint
 class ConverterFragment : Fragment() {
 
     private lateinit var binding: FragmentConverterBinding

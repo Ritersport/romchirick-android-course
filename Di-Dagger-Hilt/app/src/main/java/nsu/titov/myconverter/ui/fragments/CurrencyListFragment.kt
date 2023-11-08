@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import nsu.titov.myconverter.databinding.FragmentCurrencyListBinding
 import nsu.titov.myconverter.presentation.CurrencyListViewModel
 import nsu.titov.myconverter.ui.rv.CurrencyListRecyclerAdapter
 
+@AndroidEntryPoint
 class CurrencyListFragment : Fragment() {
 
 	private lateinit var binding: FragmentCurrencyListBinding

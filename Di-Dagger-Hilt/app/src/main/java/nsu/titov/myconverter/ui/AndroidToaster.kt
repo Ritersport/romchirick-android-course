@@ -6,8 +6,7 @@ import android.os.Looper
 import android.widget.Toast
 import nsu.titov.myconverter.presentation.Toaster
 
-//TODO DI
-class AndroidToaster(
+class AndroidToaster (
 	private val context: Context,
 ) : Toaster {
 
