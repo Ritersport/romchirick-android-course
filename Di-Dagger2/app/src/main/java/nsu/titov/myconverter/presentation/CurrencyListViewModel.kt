@@ -27,7 +27,7 @@ class CurrencyListViewModel : ViewModel() {
 		localStorage = ConverterApp.databaseInstance.currencyDao(),
 		remoteService = RetrofitInstance().api,
 	)
-	private val toaster: Toaster = AndroidToaster(ConverterApp.context)
+	private val toaster: Toaster
 
 	val currencyData: MutableLiveData<List<SimpleCurrency>> = MutableLiveData()
 	private val toasterHandler = CoroutineExceptionHandler { _, exception ->

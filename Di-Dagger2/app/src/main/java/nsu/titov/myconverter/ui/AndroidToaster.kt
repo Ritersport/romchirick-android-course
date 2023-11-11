@@ -5,9 +5,10 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import nsu.titov.myconverter.presentation.Toaster
+import javax.inject.Inject
 
 //TODO DI
-class AndroidToaster(
+class AndroidToaster @Inject constructor(
 	private val context: Context,
 ) : Toaster {
 

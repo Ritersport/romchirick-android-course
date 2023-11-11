@@ -10,8 +10,9 @@ import nsu.titov.myconverter.domain.mappers.CurrencyMapper
 import nsu.titov.myconverter.domain.models.ConverterCurrency
 import nsu.titov.myconverter.domain.models.CurrencyRepository
 import nsu.titov.myconverter.domain.models.SimpleCurrency
+import javax.inject.Inject
 
-class CurrencyRepositoryImpl(
+class CurrencyRepositoryImpl @Inject constructor(
 	private val currencyListMapper: CurrencyMapper<Currency, SimpleCurrency>,
 	private val converterMapper: CurrencyMapper<Currency, ConverterCurrency>,
 	private val internalMapper: RepositoryInternalMapper,
