@@ -1,4 +1,4 @@
-package nsu.titov.myconverter.di;
+package nsu.titov.myconverter.di
 
 import android.content.Context
 import androidx.room.Room
@@ -18,12 +18,12 @@ import nsu.titov.myconverter.data.network.CBRApiService
 import nsu.titov.myconverter.data.network.RetrofitInstance
 import nsu.titov.myconverter.data.repository.CurrencyRepositoryImpl
 import nsu.titov.myconverter.domain.mappers.CurrencyMapper
-import nsu.titov.myconverter.domain.mappers.RepositoryMapper
 import nsu.titov.myconverter.domain.models.ConverterCurrency
 import nsu.titov.myconverter.domain.models.CurrencyRepository
 import nsu.titov.myconverter.domain.models.SimpleCurrency
 import nsu.titov.myconverter.presentation.Toaster
 import nsu.titov.myconverter.ui.AndroidToaster
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -38,35 +38,39 @@ abstract class DataModule {
     @Binds
     abstract fun bindConverterMapper(impl: CurrencyToConverterMapper): CurrencyMapper<Currency, ConverterCurrency>
 
-    @Binds
-    abstract fun bindInternalMapper(impl: RepositoryInternalMapper): RepositoryMapper
 
-
-   companion object {
-
-       @Provides
-       fun provideDatabase(@ApplicationContext applicationContext: Context): CurrencyDatabase {
-           return Room.databaseBuilder(
-               applicationContext,
-               CurrencyDatabase::class.java,
-               "CurrencyDatabase"
-           ).build()
-       }
+    companion object {
+        @Singleton
+        @Provides
+        fun provideDatabase(@ApplicationContext applicationContext: Context): CurrencyDatabase {
+            return Room.databaseBuilder(
+                applicationContext,
+                CurrencyDatabase::class.java,
+                "CurrencyDatabase"
+            ).build()
+        }
 
         @Provides
         fun provideCurrencyDao(currencyDatabase: CurrencyDatabase): CurrencyDao {
             return currencyDatabase.currencyDao()
         }
 
-       @Provides
-       fun provideToaster(@ApplicationContext applicationContext: Context): Toaster {
-           return AndroidToaster(applicationContext)
-       }
+        @Provides
+        fun provideToaster(@ApplicationContext applicationContext: Context): Toaster {
+            return AndroidToaster(applicationContext)
+        }
 
-       @Provides
-       fun provideCBRApi(): CBRApiService {
-           return RetrofitInstance().api
-       }
-   }
+        @Provides
+        fun provideRepositoryInternalMapper(): RepositoryInternalMapper {
+            return RepositoryInternalMapper()
+        }
+
+
+        @Singleton
+        @Provides
+        fun provideCBRApi(): CBRApiService {
+            return RetrofitInstance().api
+        }
+    }
 
 }

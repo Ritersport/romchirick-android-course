@@ -3,15 +3,14 @@ package nsu.titov.myconverter.data.mappers
 import nsu.titov.myconverter.data.models.CBRResponse
 import nsu.titov.myconverter.data.models.Currency
 import nsu.titov.myconverter.data.models.CurrencyDto
-import nsu.titov.myconverter.domain.mappers.RepositoryMapper
 import javax.inject.Inject
 
-class RepositoryInternalMapper @Inject constructor() : RepositoryMapper {
-	override fun currencyFromResponse(response: CBRResponse): List<Currency> {
+class RepositoryInternalMapper @Inject constructor() {
+	fun currencyFromResponse(response: CBRResponse): List<Currency> {
 		return response.currencyItems.values.toList().sortedBy { it.id }
 	}
 
-	override fun dtoToCurrency(currencyDto: CurrencyDto): Currency {
+	fun dtoToCurrency(currencyDto: CurrencyDto): Currency {
 		return Currency(
 			id = currencyDto.id,
 			numCode = currencyDto.numCode,
@@ -23,7 +22,7 @@ class RepositoryInternalMapper @Inject constructor() : RepositoryMapper {
 		)
 	}
 
-	override fun currencyToDto(currency: Currency): CurrencyDto {
+	fun currencyToDto(currency: Currency): CurrencyDto {
 		return CurrencyDto(
 			id = currency.id,
 			numCode = currency.numCode,
