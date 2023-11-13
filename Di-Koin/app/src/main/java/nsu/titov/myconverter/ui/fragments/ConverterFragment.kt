@@ -7,16 +7,16 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import nsu.titov.myconverter.R
 import nsu.titov.myconverter.databinding.FragmentConverterBinding
 import nsu.titov.myconverter.presentation.ConverterViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ConverterFragment : Fragment() {
 
     private lateinit var binding: FragmentConverterBinding
     private lateinit var adapter: ArrayAdapter<String>
-    private val viewModel: ConverterViewModel by viewModels()
+    private val viewModel: ConverterViewModel by viewModel()
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,

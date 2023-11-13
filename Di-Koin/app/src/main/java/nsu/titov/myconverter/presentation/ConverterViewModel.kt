@@ -9,12 +9,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import nsu.titov.myconverter.domain.models.ConverterCurrency
 import nsu.titov.myconverter.domain.models.CurrencyRepository
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
 
-class ConverterViewModel : ViewModel(), KoinComponent {
+class ConverterViewModel(
+	private val repository: CurrencyRepository
+) : ViewModel() {
 
-	private val repository: CurrencyRepository = get()
 
 	private val currencyData: MutableLiveData<List<ConverterCurrency>> = MutableLiveData(listOf())
 	var lastConvertedValue = "0.0"

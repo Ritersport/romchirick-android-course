@@ -9,13 +9,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import nsu.titov.myconverter.domain.models.CurrencyRepository
 import nsu.titov.myconverter.domain.models.SimpleCurrency
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.get
 
-class CurrencyListViewModel : ViewModel(), KoinComponent {
+class CurrencyListViewModel(
+	private val repository: CurrencyRepository,
+	private val toaster: Toaster,
+) : ViewModel() {
 
-	private val repository: CurrencyRepository = get()
-	private val toaster: Toaster = get()
 
 	val currencyData: MutableLiveData<List<SimpleCurrency>> = MutableLiveData()
 	private val toasterHandler = CoroutineExceptionHandler { _, exception ->

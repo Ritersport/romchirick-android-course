@@ -12,9 +12,12 @@ import nsu.titov.myconverter.domain.mappers.CurrencyMapper
 import nsu.titov.myconverter.domain.models.ConverterCurrency
 import nsu.titov.myconverter.domain.models.CurrencyRepository
 import nsu.titov.myconverter.domain.models.SimpleCurrency
+import nsu.titov.myconverter.presentation.ConverterViewModel
+import nsu.titov.myconverter.presentation.CurrencyListViewModel
 import nsu.titov.myconverter.presentation.Toaster
 import nsu.titov.myconverter.ui.AndroidToaster
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
@@ -29,6 +32,8 @@ object AppModule {
             ).build()
         }
 
+        viewModel { ConverterViewModel(get()) }
+        viewModel { CurrencyListViewModel(get(), get()) }
 
         factory<CurrencyMapper<Currency, SimpleCurrency>>(named("toSimple")) { CurrencyToSimpleMapper() }
         factory<CurrencyMapper<Currency, ConverterCurrency>>(named("toConverter")) { CurrencyToConverterMapper() }
