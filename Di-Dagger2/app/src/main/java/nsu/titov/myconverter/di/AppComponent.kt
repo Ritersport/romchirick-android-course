@@ -1,6 +1,7 @@
 package nsu.titov.myconverter.di
 
 import android.app.Application
+import androidx.fragment.app.Fragment
 import dagger.Component
 import nsu.titov.myconverter.data.CurrencyDatabase
 import nsu.titov.myconverter.data.dao.CurrencyDao
@@ -11,14 +12,17 @@ import nsu.titov.myconverter.domain.mappers.CurrencyMapper
 import nsu.titov.myconverter.domain.models.ConverterCurrency
 import nsu.titov.myconverter.domain.models.CurrencyRepository
 import nsu.titov.myconverter.domain.models.SimpleCurrency
-import nsu.titov.myconverter.ui.MainActivity
+import nsu.titov.myconverter.presentation.Toaster
+import nsu.titov.myconverter.presentation.ViewModelFactory
 import javax.inject.Singleton
 
 @Singleton
-@Component(dependencies = [], modules = [AppModule::class, RoomModule::class, RepositoryModule::class])
-public interface AppComponent {
+@Component(dependencies = [], modules = [AppModule::class])
+interface AppComponent {
 
-    fun inject(application: Application)
+    fun inject(fragment: Fragment)
+
+    fun viewModelsFactory(): ViewModelFactory
 
     fun getCurrencyListMapper(): CurrencyMapper<Currency, SimpleCurrency>
 
@@ -33,6 +37,8 @@ public interface AppComponent {
     fun getCurrencyDatabase(): CurrencyDatabase
 
     fun getCurrencyRepository(): CurrencyRepository
+
+    fun getToaster(): Toaster
 
     fun getApplication(): Application
 

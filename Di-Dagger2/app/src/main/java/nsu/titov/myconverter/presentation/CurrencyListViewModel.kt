@@ -7,27 +7,15 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import nsu.titov.myconverter.ConverterApp
-import nsu.titov.myconverter.data.mappers.CurrencyToConverterMapper
-import nsu.titov.myconverter.data.mappers.CurrencyToSimpleMapper
-import nsu.titov.myconverter.data.mappers.RepositoryInternalMapper
-import nsu.titov.myconverter.data.network.RetrofitInstance
-import nsu.titov.myconverter.data.repository.CurrencyRepositoryImpl
 import nsu.titov.myconverter.domain.models.CurrencyRepository
 import nsu.titov.myconverter.domain.models.SimpleCurrency
-import nsu.titov.myconverter.ui.AndroidToaster
+import javax.inject.Inject
 
-//TODO DI
-class CurrencyListViewModel : ViewModel() {
-
-	private val repository: CurrencyRepository = CurrencyRepositoryImpl(
-		currencyListMapper = CurrencyToSimpleMapper(),
-		converterMapper = CurrencyToConverterMapper(),
-		internalMapper = RepositoryInternalMapper(),
-		localStorage = ConverterApp.databaseInstance.currencyDao(),
-		remoteService = RetrofitInstance().api,
-	)
+class CurrencyListViewModel @Inject constructor(
+	private val repository: CurrencyRepository,
 	private val toaster: Toaster
+) : ViewModel() {
+
 
 	val currencyData: MutableLiveData<List<SimpleCurrency>> = MutableLiveData()
 	private val toasterHandler = CoroutineExceptionHandler { _, exception ->
@@ -54,4 +42,5 @@ class CurrencyListViewModel : ViewModel() {
 			}
 		}
 	}
+
 }

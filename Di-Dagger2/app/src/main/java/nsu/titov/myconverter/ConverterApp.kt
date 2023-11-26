@@ -2,8 +2,7 @@ package nsu.titov.myconverter
 
 import android.app.Application
 import android.content.Context
-import androidx.room.Room
-import nsu.titov.myconverter.data.CurrencyDatabase
+import nsu.titov.myconverter.di.AppComponent
 import nsu.titov.myconverter.di.AppModule
 import nsu.titov.myconverter.di.DaggerAppComponent
 import nsu.titov.myconverter.di.RepositoryModule
@@ -11,23 +10,22 @@ import nsu.titov.myconverter.di.RoomModule
 
 class ConverterApp : Application() {
 
-    val appComponent = DaggerAppComponent.builder()
-        .appModule(AppModule(this))
-        .repositoryModule(RepositoryModule(this))
-        .roomModule(RoomModule(this))
-        .build()
+    lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
 
-        databaseInstance = appComponent.getCurrencyDatabase()
+        appComponent = DaggerAppComponent.builder()
+            .appModule(AppModule(this))
+            .repositoryModule(RepositoryModule())
+            .roomModule(RoomModule(this))
+            .build()
+
     }
 
-    companion object {
-        //TODO DI
-        lateinit var context: Context
-
-        //TODO DI
-        lateinit var databaseInstance: CurrencyDatabase
-    }
 }
+val Context.appComponent: AppComponent
+    get() = when(this) {
+        is ConverterApp -> appComponent
+        else -> this.applicationContext.appComponent
+    }
